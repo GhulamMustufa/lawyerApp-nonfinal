@@ -9,14 +9,16 @@ import {
   ScrollView,
   TextInput,
   FlatList,
-  Button
+  Button,KeyboardAvoidingView,SafeAreaView
 } from 'react-native';
+import { GiftedChat } from 'react-native-gifted-chat'
 
 export default class Chat extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      messages: [],
       data: [
         {id:1, date:"9:50 am", type:'in',  message: "Lorem ipsum dolor sit amet"},
         {id:2, date:"9:50 am", type:'out', message: "Lorem ipsum dolor sit amet"} ,
@@ -30,6 +32,27 @@ export default class Chat extends Component {
       ]
     };
   }
+  componentWillMount() {
+    this.setState({
+      messages: [
+        {
+          _id: 1,
+          text: 'Hello developer',
+          createdAt: new Date(),
+          user: {
+            _id: 2,
+            name: 'React Native',
+            avatar: 'https://placeimg.com/140/140/any',
+          },
+        },
+      ],
+    })
+  }
+  onSend(messages = []) {
+    this.setState(previousState => ({
+      messages: GiftedChat.append(previousState.messages, messages),
+    }))
+  }
 
   renderDate = (date) => {
     return(
@@ -42,8 +65,21 @@ export default class Chat extends Component {
   render() {
 
     return (
-      <View style={styles.container}>
-        <FlatList style={styles.list}
+      
+      <KeyboardAvoidingView
+      style={styles.container}
+      behavior="padding"
+      keyboardVerticalOffset={0}
+    >
+      
+      <GiftedChat
+        messages={this.state.messages}
+        onSend={messages => this.onSend(messages)}
+        user={{
+          _id: 1,
+        }}
+      />
+        {/* <FlatList style={styles.list}
           data={this.state.data}
           keyExtractor= {(item) => {
             return item.id;
@@ -74,15 +110,16 @@ export default class Chat extends Component {
             <TouchableOpacity style={styles.btnSend}>
               <Image source={{uri:"https://png.icons8.com/small/75/ffffff/filled-sent.png"}} style={styles.iconSend}  />
             </TouchableOpacity>
-        </View>
-      </View>
+        </View> */}
+      
+      </KeyboardAvoidingView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container:{
-    flex:1
+    flex:1,
   },
   list:{
     paddingHorizontal: 17,

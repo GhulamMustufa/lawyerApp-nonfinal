@@ -37,7 +37,12 @@ export default class Profile extends React.Component {
       areaoflaw: "",
       education: "",
       qualification: "",
-      languages: ""
+      languages: "",
+      Divorse: false,
+        Bankrupcy: false,
+        Child_Labour: false,
+        Government_Law: false,
+        Tax_Law: false,
     };
   }
   componentDidMount() {
@@ -61,7 +66,12 @@ export default class Profile extends React.Component {
         areaoflaw: data.areaoflaw,
         education: data.education,
         qualification: data.qualification,
-        languages: data.languages
+        languages: data.languages,
+        Divorse: data.Divorse,
+        Bankrupcy: data.Bankrupcy,
+        Child_Labour: data.Child_Labour,
+        Government_Law: data.Government_Law,
+        Tax_Law: data.Tax_Law,
         })
       });
   }

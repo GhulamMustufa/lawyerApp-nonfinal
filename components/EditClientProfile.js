@@ -11,6 +11,7 @@ import {
   ScrollView,
   CheckBox
 } from "react-native";
+
 import {
   Container,
   Header,
@@ -41,9 +42,10 @@ export default class EditClientProfile extends React.Component {
       languages: "",
         Divorse: false,
         Bankrupcy: false,
-        Child_Labour: true,
-        Government_Law: true,
-        Tax_Law: false
+        Child_Labour: false,
+        Government_Law: false,
+        Tax_Law: false,
+        
       
     };
   }
@@ -59,7 +61,12 @@ export default class EditClientProfile extends React.Component {
       areaoflaw: this.state.areaoflaw.split(","),
       education: "",
       qualification: "",
-      languages: this.state.languages.split(",")
+      languages: this.state.languages.split(","),
+      Divorse: false,
+        Bankrupcy: false,
+        Child_Labour: false,
+        Government_Law: false,
+        Tax_Law: false,
     };
     firebase
       .database()
@@ -110,6 +117,7 @@ export default class EditClientProfile extends React.Component {
   
   }
   render() {
+    
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.form} enabled>
         <ScrollView>
@@ -185,6 +193,8 @@ export default class EditClientProfile extends React.Component {
             <Text>Areas of Law</Text>
             <View style={styles.card}>
               <CheckBox
+              name="Bankrupcy"
+              
                 value={this.state.Bankrupcy}
                 onChange={() => {
                   this.checkBoxTest1();
@@ -192,25 +202,25 @@ export default class EditClientProfile extends React.Component {
               /><Text>Bankrupcy</Text>
               <CheckBox
               name="Child_Labour"
-                value={this.state.checkboxes.Child_Labour}
+                value={this.state.Child_Labour}
                 onChange={() => {
                   this.checkBoxTest2();
                 }}
               /><Text>Child_Labour</Text>
               <CheckBox
-                value={this.state.checkboxes.Government_Law}
+                value={this.state.Government_Law}
                 onChange={() => {
                   this.checkBoxTest3();
                 }}
               /><Text>Government_Law</Text>
               <CheckBox
-                value={this.state.checkboxes.Tax_Law}
+                value={this.state.Tax_Law}
                 onChange={() => {
                   this.checkBoxTest4();
                 }}
               /><Text>Tax_Law</Text>
               <CheckBox
-                value={this.state.checkboxes.Divorse}
+                value={this.state.Divorse}
                 onChange={() => {
                   this.checkBoxTest5();
                 }}
