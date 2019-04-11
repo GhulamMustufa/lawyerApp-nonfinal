@@ -39,10 +39,10 @@ export default class Profile extends React.Component {
       qualification: "",
       languages: "",
       Divorse: false,
-        Bankrupcy: false,
-        Child_Labour: false,
-        Government_Law: false,
-        Tax_Law: false,
+      Bankrupcy: false,
+      Child_Labour: false,
+      Government_Law: false,
+      Tax_Law: false
     };
   }
   componentDidMount() {
@@ -53,26 +53,26 @@ export default class Profile extends React.Component {
       .child(uid)
       .on("value", snapshot => {
         let data = snapshot.val();
-        let items = Object.values(data);
+        // let items = Object.values(data);
         // this.setState({ items });
-        console.log(data,"****************");
+        console.log(data, "****************");
         this.setState({
           username: data.username,
-        email: data.email,
-        password: data.password,
-        contact: data.contact,
-        address: data.address,
-        description: data.description,
-        areaoflaw: data.areaoflaw,
-        education: data.education,
-        qualification: data.qualification,
-        languages: data.languages,
-        Divorse: data.Divorse,
-        Bankrupcy: data.Bankrupcy,
-        Child_Labour: data.Child_Labour,
-        Government_Law: data.Government_Law,
-        Tax_Law: data.Tax_Law,
-        })
+          email: data.email,
+          password: data.password,
+          contact: data.contact,
+          address: data.address,
+          description: data.description,
+          areaoflaw: data.areaoflaw,
+          education: data.education,
+          qualification: data.qualification,
+          languages: data.languages,
+          Divorse: data.Divorse,
+          Bankrupcy: data.Bankrupcy,
+          Child_Labour: data.Child_Labour,
+          Government_Law: data.Government_Law,
+          Tax_Law: data.Tax_Law
+        });
       });
   }
   deleteUser() {
@@ -82,14 +82,14 @@ export default class Profile extends React.Component {
       .ref("users/Lawyers")
       .child(uid)
       .remove();
-      this.props.navigation.navigate("SignUpLawyer");
-      // .then(result => {
-      //   console.log("Profile deleted Successfully");
-      //   this.props.navigation.navigate("SignUpLawyer");
-      // })
-      // .catch(error => {
-      //   console.log(error);
-      // });
+    this.props.navigation.navigate("SignUpLawyer");
+    // .then(result => {
+    //   console.log("Profile deleted Successfully");
+    //   this.props.navigation.navigate("SignUpLawyer");
+    // })
+    // .catch(error => {
+    //   console.log(error);
+    // });
   }
   render() {
     return (
@@ -168,7 +168,7 @@ export default class Profile extends React.Component {
               <View style={styles.card}>
                 <Text style={styles.cardTittle}>Areas of Law</Text>
                 <Text>
-                  {(!this.state.areaoflaw)
+                  {!this.state.areaoflaw
                     ? `- Bankrupcy - Divorse  - Child Labour`
                     : this.state.areaoflaw}
                 </Text>
@@ -209,7 +209,9 @@ export default class Profile extends React.Component {
                   {" "}
                   {!this.state.contact
                     ? `- Email: abc@gmail.com \n- Linkedin: www.linkedin.com/abcOfficial \n- Twitter: www.twitter.com/abcOfficial \n- Facebook: www.facebook.com/abcOfficial `
-                    : `${this.state.contact} - Email: abc@gmail.com \n- Linkedin: www.linkedin.com/abcOfficial \n- Twitter: www.twitter.com/abcOfficial \n- Facebook: www.facebook.com/abcOfficial `}
+                    : `${
+                        this.state.contact
+                      } - Email: abc@gmail.com \n- Linkedin: www.linkedin.com/abcOfficial \n- Twitter: www.twitter.com/abcOfficial \n- Facebook: www.facebook.com/abcOfficial `}
                 </Text>
               </View>
 
